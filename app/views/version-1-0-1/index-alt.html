@@ -1,0 +1,403 @@
+{% extends 'layout.html' %}
+{% set bodyAttributes = { id: 'assess' } %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% set containerClasses = 'govuk-width-container govuk-width-container--wide' %}
+{% set keyDetailsBarClasses = 'key-details-bar__key-details--wide' %}
+
+{% set checkESA = data['benefit-type'] and data['benefit-type'].includes('ESA') %}
+{% set checkPIP = data['benefit-type'] and data['benefit-type'].includes('PIP') %}
+{% set checkUC = data['benefit-type'] and data['benefit-type'].includes('UC') %}
+
+{% set showAll = true if not data['benefit-type'] or (not data['benefit-type'].includes('ESA') and not data['benefit-type'].includes('PIP') and not data['benefit-type'].includes('UC')) %}
+
+{% set showESA = true if data['benefit-type'] and data['benefit-type'].includes('ESA') or showAll %}
+{% set showPIP = true if data['benefit-type'] and data['benefit-type'].includes('PIP') or showAll %}
+{% set showUC = true if data['benefit-type'] and data['benefit-type'].includes('UC') or showAll %}
+
+{% block main %}
+  {% include 'includes/assessment-status-neutral.html' %}
+
+  <div class="{{ containerClasses }}">
+    <!-- <a href="referral-page" class="govuk-back-link">Back</a> -->
+    <a href="referral-page" class="govuk-back-link">Back</a>
+
+    <!-- <div class="navigation-header">
+      <ul class="govuk-list">
+        <li class="govuk-!-margin-bottom-2"><a href="#" class="govuk-link--no-visited-state govuk-link--no-underline">Referrals</a></li>
+        <li class="govuk-!-margin-bottom-2"><a href="#" class="govuk-link--no-visited-state govuk-link--no-underline">Claimant details</a></li>
+        <li class="govuk-!-margin-bottom-2"><a href="#" class="govuk-link--no-visited-state govuk-link--no-underline">Appointments</a></li>
+        <li class="govuk-!-margin-bottom-2"><a href="#" class="govuk-link--no-visited-state govuk-link--no-underline">Evidence</a></li>
+        <li class="govuk-!-margin-bottom-2 active">Claimant log</li>
+      </ul>
+    </div> -->
+
+    <main class="govuk-main-wrapper {{ mainClasses }}" id="main-content" role="main" {% if mainLang %} lang="{{ mainLang }}" {% endif %}>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-quarter">
+          <h2 class="govuk-heading-m govuk-!-Marchgin-bottom-5">
+            Filters
+          </h2>
+          <div id="filter-hint" class="govuk-hint govuk-!-Marchgin-bottom-4">
+            Select one or more filters to apply to the list.
+          </div>
+          <div class="table-filter">
+            <form id="filters" action="index-alt" method="post">
+              <!--Filters-->
+              <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                  Benefit type
+                </legend>
+
+                <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="esa" name="benefit-type" type="checkbox" value="ESA" {% if checkESA %} checked {% endif %}>
+                      <label class="govuk-label govuk-checkboxes__label" for="esa">
+                        Employment Support Allowance (2)
+                      </label>
+                    </div>
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="pip" name="benefit-type" type="checkbox" value="PIP" {% if checkPIP %} checked {% endif %}>
+                      <label class="govuk-label govuk-checkboxes__label" for="pip">
+                        Personal Independence Payment (3)
+                      </label>
+                    </div>
+                    <div class="govuk-checkboxes__item">
+                        <input class="govuk-checkboxes__input" id="uc" name="benefit-type" type="checkbox" value="UC" {% if checkUC %} checked {% endif %}>
+                        <label class="govuk-label govuk-checkboxes__label" for="uc">
+                          Universal Credit (6)
+                        </label>   
+                    </div>     
+                </div>
+              </fieldset>
+              </div>
+
+              <button class="govuk-button govuk-button--secondary govuk-!-Marchgin-bottom-8">Apply filters</button>
+            </form>
+      
+      
+      
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-three-quarters">
+          <h1 class="govuk-heading-l">
+            Timeline
+          </h1>
+
+          <p class="govuk-!-margin-bottom-9"><a href="referral">Add {% if  data['claim']   != 'UC' %}PIP  {% else %} UC {% endif %} entry to timeline</a></p>
+
+          <ol class="dwp-timeline">
+            {% if data['log'] %}
+              <li class="dwp-timeline__entry">
+
+                <h2 class="govuk-heading-s govuk-!-margin-bottom-1">{% if  data['claim']   != 'UC' %}PIP  {% else %} UC {% endif %}  {{ data['action'] }}  {{ data['inc-action'] }} {{ data['action-details'] }} {{ data['inc-action-details'] }} </h2>
+               
+             
+
+                <p class="govuk-caption-m govuk-!-margin-bottom-1">
+                  {% if data['additional-details'] %} 
+                    {{ data['additional-details'] }}
+                    <br><br>
+                  {% endif %}
+
+                  {% if data['fme-box-details'] %}
+                    {{ data['fme-box-details'] }}
+                    <br><br>
+                  {% endif %}
+
+                  {% if data['review-box-details'] %}
+                    {{ data['review-box-details'] }}
+                    <br><br>
+                  {% endif %}
+
+                  {% if data['failed-box-details'] %}
+                    {{ data['failed-box-details'] }}
+                    <br><br>
+                  {% endif %}
+
+                  {% if data['booking-box-details'] %}
+                    {{ data['booking-box-details'] }}
+                    <br><br>
+                  {% endif %}
+
+                  {% if data['rebooking-box-details'] %}
+                    {{ data['rebooking-box-details'] }}
+                    <br><br>
+                  {% endif %}
+
+                  {% if data['pbr-booking-box-details'] %}
+                    {{ data['pbr-booking-box-details'] }}
+                    <br><br>
+                  {% endif %}
+
+                  {% if data['what'] === 'outgoing' %}
+                    {{ data['contact-method'] }} to
+                  {% else %}
+
+                    {{ data['contact-method'] }}
+                  {% endif %}
+
+                  {% if data['who'] === 'the claimant' %}
+                    the claimant
+                  {% else %} 
+                    {{ data['who-details'] }}
+                  {% endif %}
+
+                  {% if data['what'] === 'event' %}
+                    by Phillip Smith
+                  {% endif %}
+
+                  {% if data['what'] === 'incoming' %}
+                    by Phillip Smith
+                  {% endif %}
+
+                  {% if data['what'] === 'outgoing' %}
+                    by Phillip Smith
+
+                    {% if data['phone-answer-details'] %}
+                      <p class="govuk-caption-m govuk-!-margin-bottom-1">
+                        No answer: {{ data['phone-answer-details'] }}
+                      </p>
+                    {% endif %}
+                  {% endif %}
+                </p>
+
+                <p class="govuk-caption-m">
+                  {% if data['year'] %}
+                    {{ data['day']}} {{ data['month'] | toMonth }} {{ data['year']}}
+                  {% else %}
+                    25 October 2022
+                  {% endif %}
+
+             
+                  
+                  {% if data['time2'] %}
+                  at  {{ data['time2'] }}
+                 
+                  {% endif %}
+                </p>
+              </li>  
+            {% endif %}
+
+            <!-- <li class="dwp-timeline__entry">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+                ESA Booked an assessment
+              </h2>
+              
+              <p class="govuk-caption-m govuk-!-margin-bottom-1">
+                Text message (SMS) and post to the claimant by Phillip Smith
+              </p>
+              
+              <p class="govuk-caption-m">
+                01 October 2022
+              </p>
+            </li> -->
+
+            <!-- <li class="dwp-timeline__entry">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+                ESA Returned questionnaire
+              </h2>
+
+              <p class="govuk-caption-m govuk-!-margin-bottom-1">
+                Post from claimant
+              </p>
+
+              <p class="govuk-caption-m">
+                  23 September 2022
+              </p>
+            </li> -->
+
+            {% if showUC %} 
+
+            <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-1">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-1">
+                UC Returned questionnaire
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-1">
+                Telephone call from the claimant by Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-1">
+                6 June 2023
+              </p>
+            </li>
+            {% endif %}
+
+
+            {% if showPIP %} 
+    
+            <li class="dwp-timeline__entry dwp-timeline__events--entry pip_filter_tag" id="event-2">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-2">
+                PIP Withdrew their claim
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-2">
+                Telephone call from the claimant by Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-2">
+                6 June 2023
+              </p>
+            </li>
+            {% endif %}
+    
+            {% if showESA %} 
+            <li class="dwp-timeline__entry dwp-timeline__events--entry esa_filter_tag" id="event-3">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-3">
+                ESA Assessment abandoned
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-3">
+                By Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-3">
+                6 June 2023
+              </p>
+            </li>
+            {% endif %}
+    
+
+            {% if showUC %} 
+            <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-4">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-4">
+                UC Sent questionnaire
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-4">
+                Telephone call to the claimant by Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-4">
+                6 June 2023
+              </p>
+            </li>
+            {% endif %}
+    
+
+            {% if showPIP %} 
+            <li class="dwp-timeline__entry dwp-timeline__events--entry pip_filter_tag" id="event-5">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-5">
+                PIP Paper based review booked
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-5">
+                By Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-5">
+                6 June 2023
+              </p>
+            </li>
+            {% endif %}
+    
+            {% if showESA %} 
+            <li class="dwp-timeline__entry dwp-timeline__events--entry esa_filter_tag" id="event-6">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-6">
+                ESA Returned questionnaire
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-6">
+                Telephone call from the claimant by Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-6">
+                6 June 2023
+              </p>
+            </li>
+            {% endif %}
+    
+            {% if showUC %} 
+            <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-7">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-7">
+                UC Initial or further evidence reviewed
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-7">
+                By Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-7">
+                6 June 2023
+              </p>
+            </li>
+            {% endif %}
+    
+            {% if showPIP %} 
+            <li class="dwp-timeline__entry dwp-timeline__events--entry pip_filter_tag" id="event-8">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-8">
+                PIP Progress chasing
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-8">
+                Email from the claimant by Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-8">
+                6 June 2023
+              </p>
+            </li>
+            {% endif %}
+    
+            {% if showUC %} 
+            <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-9">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-9">
+                UC Rescheduled an assessment
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-9">
+                Telephone call to the claimant by Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-9">
+                6 June 2023
+              </p>
+            </li>
+            {% endif %}
+    
+            {% if showUC %} 
+            <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-10">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-10">
+                UC Rescheduled an assessment
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-10">
+                Telephone call from the claimant by Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-10">
+                6 June 2023
+              </p>
+            </li>
+            {% endif %}
+    
+            {% if showUC %} 
+            <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-11">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-11">
+                UC Returned questionnaire
+              </h2>
+    
+              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-11">
+                Telephone call from the claimant by Gordon Carroll
+              </p>
+    
+              <p class="govuk-caption-m" id="event-date-11">
+                6 June 2023
+              </p>
+            </li>
+
+            {% endif %}
+          </ol>
+        </div>
+
+       
+      </div>
+    </main>
+  </div>
+{% endblock %}

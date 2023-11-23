@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+{% set bodyAttributes = { id: "assess" } %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block main %}
+
+{% include "includes/assessment-status-neutral.html" %}
+
+
+  <div class="govuk-width-container {{ containerClasses }}">
+    <div class="navigation-header">
+      <ul class="govuk-list">
+        <li class="govuk-!-margin-bottom-2"><a href="#" class="govuk-link--no-visited-state govuk-link--no-underline">Referrals</a></li>
+        <li class="govuk-!-margin-bottom-2"><a href="#" class="govuk-link--no-visited-state govuk-link--no-underline">Claimant details</a></li>
+        <li class="govuk-!-margin-bottom-2"><a href="#" class="govuk-link--no-visited-state govuk-link--no-underline">Appointments</a></li>
+        <li class="govuk-!-margin-bottom-2"><a href="#" class="govuk-link--no-visited-state govuk-link--no-underline">Evidence</a></li>
+        <li class="govuk-!-margin-bottom-2 active">Claimant log</li>
+      </ul>
+    </div>
+
+    <main class="govuk-main-wrapper {{ mainClasses }}" id="main-content" role="main"{% if mainLang %} lang="{{ mainLang }}"{% endif %}>
+
+      
+
+        <div class="govuk-grid-row">
+
+          
+
+            <div class="govuk-grid-column-two-thirds">
+
+              <form action="incoming-channel" id="question-form" method="post">
+
+              {{ govukBackLink({
+                text: "Back",
+                href: "what"
+              }) }}
+
+              {% set otherHtml %}
+              {{ govukInput({
+                id: "other",
+                name: "other",
+                type: "textarea",
+                label: {
+                  text: "Add brief details explaining why the claimant contacted us"
+                }
+              }) }}
+              {% endset -%}
+
+              {{ govukRadios({
+                idPrefix: "type",
+                name: "type",
+                fieldset: {
+                  legend: {
+                    text: "Why did the claimant contact us?",
+                    isPageHeading: true,
+                    classes: "govuk-fieldset__legend--l"
+                  }
+                },
+                items: [
+                  {
+                    value: "Returned questionnaire",
+                    text: "Returned questionnaire"
+                  },
+                  {
+                    value: "Rescheduled an assessment",
+                    text: "Rescheduled an assessment"
+                  },
+                  {
+                    value: "Withdrew their claim",
+                    text: "Withdrew their claim"
+                  },
+                  {
+                    value: "Submitted a mandatory reconsideration",
+                    text: "Submitted a mandatory reconsideration"
+                  },
+                  {
+                    value: "Other",
+                    text: "Other",
+                    conditional: {
+                      html: otherHtml
+                    }
+                  }
+                ]
+              }) }}
+
+              {{ govukButton({
+                text: "Save and continue"
+              }) }}
+
+            </form>
+
+            </div>
+        </div>
+
+    </main>
+  </div>
+
+
+  <script type="text/javascript">
+    document.getElementById("type-2").onclick = function() {
+          var link = "assessment-booking";
+      document.getElementById("question-form").action=link;
+    }
+  </script>
+
+{% endblock %}

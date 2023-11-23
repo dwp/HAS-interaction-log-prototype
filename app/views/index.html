@@ -1,0 +1,427 @@
+{% extends 'layout.html' %}
+{% set bodyAttributes = { id: 'home' } %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block main %}
+  {% include 'includes/home-header.html' %}
+
+  <div class="govuk-width-container {{ containerClasses }} govuk-!-margin-bottom-9">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">
+        <ul class="govuk-list">
+          <li>
+            <a href="#current-prototype" class="govuk-link--no-visited-state govuk-link--no-underline">Current prototype</a>
+          </li>
+
+          <li>
+            <a href="#archive" class="govuk-link--no-visited-state govuk-link--no-underline">Archive</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-grid-column-three-quarters">
+        <h2 class="govuk-heading-l" id="current-prototype">
+          Current prototype
+        </h2>
+
+        <p class="govuk-body-l">
+          These prototypes represent the current thinking on the HAS Interaction Log
+        </p>
+
+        <h3 class="govuk-heading-m" style="margin-top: -10px;">
+          Version 1.0.1
+        </h3>
+
+        <p>
+          Testing an MVP for filtering
+        </p>
+
+        <form action="version-1-0-1/referral-page" method="post" class="form">
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <h1 class="govuk-heading-s">
+                Select a referral to see relevant actions:
+              </h1>
+
+              <div class="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim2-uc" name="claim" type="radio" value="UC" {{ checked('claim', 'UC') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim2-uc">
+                    Universal Credit / Employee Support Allowance
+                  </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim2-pip" name="claim" type="radio" value="PIP" {{ checked('claim', 'PIP') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim2-pip">
+                    Personal Independence Payment
+                  </label>
+                </div>
+              </div>
+
+              <br>
+
+
+
+
+
+              <button class="govuk-button" data-module="govuk-button">Start journey</button>
+            </fieldset>
+          </div>
+        </form>
+
+        <p style="margin-top:-30px;"><a href="version-1-0-1/filter-no-results">Filter page: no results</a></p>
+       
+
+     
+        <hr class="govuk-!-margin-top-9 govuk-!-margin-bottom-6">
+
+
+
+        <h2 class="govuk-heading-l" id="archive">
+          Archived prototypes
+        </h2>
+
+        <h3 class="govuk-heading-m" style="margin-top: -10px;">
+          Version 1.0.0
+        </h3>
+
+        <p>
+          Updated to reflect wider page width, default date, and character count.
+        </p>
+
+        <form action="version-1-0-0/referral-page" method="post" class="form">
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <h1 class="govuk-heading-s">
+                Select a referral to see relevant actions:
+              </h1>
+
+              <div class="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim2-uc" name="claim" type="radio" value="UC" {{ checked('claim', 'UC') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim2-uc">
+                    Universal Credit / Employee Support Allowance
+                  </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim2-pip" name="claim" type="radio" value="PIP" {{ checked('claim', 'PIP') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim2-pip">
+                    Personal Independence Payment
+                  </label>
+                </div>
+              </div>
+
+              <br>
+
+              <button class="govuk-button" data-module="govuk-button">Start journey</button>
+            </fieldset>
+          </div>
+        </form>
+        
+        <h3 class="govuk-heading-m" style="margin-top: -10px;">
+          Version 0.3.6
+        </h3>
+
+        <p>
+          Email available of author of timeline entry. (Compatible with claimant contact prototype)
+        </p>
+
+        <a href="version-0-3-6/"class="govuk-button">Start journey</a>
+
+        <h3 class="govuk-heading-m" style="margin-top: -10px;">
+          Version 0.3.5 (MVP)
+        </h3>
+
+        <form action="version-0-3-5/" method="post" class="form">
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <h1 class="govuk-heading-s">
+                Select a referral to see relevant actions:
+              </h1>
+
+              <div class="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim2-uc" name="claim" type="radio" value="UC" {{ checked('claim', 'UC') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim2-uc">
+                    Universal Credit / Employee Support Allowance
+                  </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim2-pip" name="claim" type="radio" value="PIP" {{ checked('claim', 'PIP') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim2-pip">
+                    Personal Independence Payment
+                  </label>
+                </div>
+              </div>
+
+              <br>
+
+              <button class="govuk-button" data-module="govuk-button">Start journey</button>
+            </fieldset>
+          </div>
+        </form>
+
+
+      
+          <a href="version-0-3-5/empty-view.html">Nothing added to timeline</a>
+
+          <br><br>
+
+          <a href="version-0-3-5/no-nino">Claimant with no NINO</a>
+
+          <br><br>
+
+          <a href="version-0-3-5/service-unavailable">Service unavailable error page</a>
+
+          <br><br>
+
+          <a href="version-0-3-5/referral-page">Chaffinch referral page</a>
+        </p>
+
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
+          Tickets:
+        </h4>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>
+            <a href="https://dwpdigital.atlassian.net/browse/HTRB-1223" target="_blank">HTRB-1223</a>, Prototype amends following from usability UR evaluation
+          </li>
+        </ul>
+
+    
+
+        <h3 class="govuk-heading-m" >
+          Version 0.3.4
+        </h3>
+
+        <p>
+          Attempting to make the contact type easier than incoming, outgoing and event update.
+        </p>  
+
+        <form action="version-0-3-4/" method="post" class="form">
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <h1 class="govuk-heading-s">
+                Select a referral to see relevant actions:
+              </h1>
+
+              <div class="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim3-uc" name="claim" type="radio" value="UC" {{ checked('claim', 'UC') }}>
+                  
+                  <label class="govuk-label govuk-radios__label" for="claim3-uc">
+                    Universal Credit / Employee Support Allowance
+                  </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim3-pip" name="claim" type="radio" value="PIP" {{ checked('claim', 'PIP') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim3-pip">
+                    Personal Independence Payment
+                  </label>
+                </div>
+              </div>
+
+              <br>
+
+              <button class="govuk-button" data-module="govuk-button">Start journey</button>
+            </fieldset>
+          </div>
+        </form>
+
+        <h3 class="govuk-heading-m" style="margin-top: -10px;">
+          Version 0.3.3
+        </h3>
+
+        <form action="version-0-3-3/" method="post" class="form">
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <h1 class="govuk-heading-s">
+                Select a referral to see relevant actions:
+              </h1>
+
+              <div class="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim2-uc" name="claim" type="radio" value="UC" {{ checked('claim', 'UC') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim2-uc">
+                    Universal Credit / Employee Support Allowance
+                  </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim2-pip" name="claim" type="radio" value="PIP" {{ checked('claim', 'PIP') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim2-pip">
+                    Personal Independence Payment
+                  </label>
+                </div>
+              </div>
+
+              <br>
+
+              <button class="govuk-button" data-module="govuk-button">Start journey</button>
+            </fieldset>
+          </div>
+        </form>
+
+        <p>
+          <a href="version-0-3-3/referral-page">Chaffinch referral page (PIP benefit)</a> (Link to Timeline)
+        </p>
+
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
+          Tickets:
+        </h4>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>
+            <a href="https://dwpdigital.atlassian.net/browse/HTRB-1168" target="_blank">HTRB-1168</a>, Prototype amends following from usability UR evaluation
+          </li>
+        </ul>
+
+        <h2 class="govuk-heading-m" id="mvp-prototype">
+          Previous MVP prototype (archived)
+        </h2>
+
+        <h3 class="govuk-heading-m" style="margin-top: -10px;">
+          Version 0.3.2
+        </h3>
+
+        <p>
+          Condensed / alternate journey MVP
+        </p>
+
+        <form action="version-0-3-2/referral" method="post" class="form">
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <h1 class="govuk-heading-s">
+                Select a referral to see relevant actions:
+              </h1>
+
+              <div class="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim-uc" name="claim" type="radio" value="UC" {{ checked('claim', 'UC') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim-uc">
+                    Universal Credit / Employee Support Allowance
+                  </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="claim-pip" name="claim" type="radio" value="PIP" {{ checked('claim', 'PIP') }}>
+
+                  <label class="govuk-label govuk-radios__label" for="claim-pip">
+                    Personal Independence Payment
+                  </label>
+                </div>
+              </div>
+
+              <br>
+
+              <button class="govuk-button" data-module="govuk-button">Start journey</button>
+
+              <p>
+                <a href="version-0-3-2/referral-page">Chaffinch referral page</a> (Link to interaction log)</li>
+              </p>
+            </fieldset>
+          </div>
+        </form>
+
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">Additional pages</span>
+          </summary>
+
+          <div class="govuk-details__text">
+            <ul class="govuk-list govuk-list--bullet">
+              <li>
+                <a href="version-0-3-2/validation-01">Flat validation: Date in the future</a> (Why are you adding a new entry)
+              </li>
+
+              <li>
+                <a href="version-0-3-2/assessment-booking">Assessment booking details</a> (removed for MVP)
+              </li>
+
+              <li>
+                <a href="version-0-3-2/pbr-assessment-booking">Paper based review booking details</a> (removed for MVP)
+              </li>
+
+              <li>
+                <a href="version-0-3-2/phone-answer">Did they answer the phone?</a> (removed for MVP)
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
+          Tickets:
+        </h4>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>
+            <a href="https://dwpdigital.atlassian.net/browse/HTRB-994" target="_blank">HTRB-994</a>, Iteration of prototype
+          </li>
+        </ul>
+
+        <h3 class="govuk-heading-m">
+          Previous version 3 prototype
+        </h3>
+
+        <p>
+          <a href="version-0-3">Version 0.3</a> 
+        </p>
+
+        <p>
+          <a href="version-0-3-1">Version 0.3.1</a> (One thing per page journey made dynamic)
+        </p>
+
+        <h3 class="govuk-heading-m">
+          Version 0.2 (Straw man - contacts and events)
+        </h3>
+
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
+          Tickets:
+        </h4>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>
+            <a href="https://dwpdigital.atlassian.net/browse/HTRB-781">HTRB-781</a>, Prototype Design of interaction log (contact log)
+          </li>
+        </ul>
+
+        <a href="version-0-2/" class="govuk-button">Start</a>
+
+        <h3 class="govuk-heading-m">
+          Version 0.1 (Straw man - contacts only)
+        </h3>
+
+        <h4 class="govuk-heading-s govuk-!-margin-bottom-1">
+          Tickets:
+        </h4>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>
+            <a href="https://dwpdigital.atlassian.net/browse/HTRB-781">HTRB-781</a>, Prototype Design of interaction log (contact log)
+          </li>
+        </ul>
+
+        <a href="version-0-1/" class="govuk-button">Start</a>
+
+        <hr class="govuk-!-margin-top-9 govuk-!-margin-bottom-6">
+      </div>
+    </div>
+  </div>
+{% endblock %}
