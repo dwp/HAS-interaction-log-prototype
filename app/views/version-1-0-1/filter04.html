@@ -19,7 +19,7 @@
 {% set showPIP = true if data['benefit-type'] and data['benefit-type'].includes('PIP') or showAll %}
 {% set showUC = true if data['benefit-type'] and data['benefit-type'].includes('UC') or showAll %}
 
-
+<!-- contact type -->
 {% set checkincoming =  true if data['contact-type'] and data['contact-type'].includes('incoming') %}
 
 {% set checkincoming = data['contact-type'] and data['contact-type'].includes('incoming') %}
@@ -32,6 +32,24 @@
 {% set showincoming = true if data['contact-type'] and data['contact-type'].includes('incoming') or showAll %}
 {% set showoutgoing = true if data['contact-type'] and data['contact-type'].includes('outgoing') or showAll %}
 {% set showupdate = true if data['contact-type'] and data['contact-type'].includes('update') or showAll %}
+
+
+<!-- interaction type-->
+
+
+{% set checkappointment =  true if data['interaction-type'] and data['interaction-type'].includes('appointment') %}
+
+{% set checkappointment = data['interaction-type'] and data['interaction-type'].includes('appointment') %}
+{% set checkdocument = data['interaction-type'] and data['interaction-type'].includes('document') %}
+{% set checkclaimupdate = data['interaction-type'] and data['interaction-type'].includes('claimupdate') %}
+
+{% set showAll = true if not data['interaction-type'] or (not data['interaction-type'].includes('appointment') and not data['interaction-type'].includes('document') and not data['interaction-type'].includes('claimupdate')) %}
+
+
+{% set showappointment = true if data['interaction-type'] and data['interaction-type'].includes('appointment') or showAll %}
+{% set showdocument = true if data['interaction-type'] and data['interaction-type'].includes('document') or showAll %}
+{% set showclaimupdate = true if data['interaction-type'] and data['interaction-type'].includes('claimupdate') or showAll %}
+
 
 
 
@@ -57,7 +75,7 @@
             Select one or more filters to apply to the list.
           </div>
           <div class="table-filter">
-            <form id="filters" action="filter01" method="post"> 
+            <form id="filters" action="filter04" method="post"> 
               <!--Filters-->
               <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
@@ -120,6 +138,102 @@
               </fieldset>
               </div>
 
+
+
+              <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                  Interaction type
+                </legend>
+
+                
+                <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="appointment" name="interaction-type" type="checkbox" value="appointment" {% if checkappointment %} checked {% endif %}>
+                      <label class="govuk-label govuk-checkboxes__label" for="appointment">
+                        Appointment  
+                      </label>
+                    </div>
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="document" name="interaction-type" type="checkbox" value="document" {% if checkdocument %} checked {% endif %}>
+                      <label class="govuk-label govuk-checkboxes__label" for="document">
+                        Documentation
+                      </label>
+                    </div>
+                   
+                    
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="claimupdate" name="interaction-type" type="checkbox" value="claimupdate" {% if checkclaimupdate%} checked {% endif %}>
+                      <label class="govuk-label govuk-checkboxes__label" for="claimupdate">
+                        Claim update
+                      </label>   
+                  </div>   
+                </div>
+              </fieldset>
+              </div>
+
+
+
+              <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                From date
+                </legend>
+
+
+                <div class="govuk-date-input" id="passport-issued">
+                  <div class="govuk-date-input__item" style="margin-right: 10px;">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="passport-issued-day">
+                        Day
+                      </label>
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-day" name="passport-issued-day" type="text" inputmode="numeric">
+                    </div>
+                  </div>
+                  <div class="govuk-date-input__item" style="margin-right: 10px;"> 
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="passport-issued-month">
+                        Month
+                      </label>
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-month" name="passport-issued-month" type="text" inputmode="numeric">
+                    </div>
+                  </div>
+                  <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="passport-issued-year">
+                        Year
+                      </label>
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="passport-issued-year" name="passport-issued-year" type="text" inputmode="numeric">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="govuk-form-group" style="padding-top:20px;">
+                  <fieldset class="govuk-fieldset">
+                 
+
+
+                    <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+                      <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="changedName" name="changedName" type="radio" value="month">
+                        <label class="govuk-label govuk-radios__label" for="changedName">
+                        Last 3 months
+                        </label>
+                      </div>
+                      <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="changedName-2" name="changedName" type="radio" value="year">
+                        <label class="govuk-label govuk-radios__label" for="changedName-2">
+                          Last 6 months
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+
+                </fieldset>
+                </div>
+
               <button class="govuk-button govuk-button--secondary govuk-!-Marchgin-bottom-8">Apply filters</button>
             </form>
       
@@ -139,11 +253,11 @@
 
           
 
-            {% if showUC and showincoming %}
+            {% if showUC and showincoming and showdocument %}
             
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-1">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-1">
-                UC Returned questionnaire
+                UC Documentation: Returned questionnaire
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-1">
@@ -157,11 +271,11 @@
             {% endif %}
 
 
-            {% if showPIP and showincoming %} 
+            {% if showPIP and showincoming and showclaimupdate %} 
     
             <li class="dwp-timeline__entry dwp-timeline__events--entry pip_filter_tag" id="event-2">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-2">
-                PIP Withdrew their claim
+                PIP Claim update: Withdrew their claim
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-2">
@@ -174,10 +288,10 @@
             </li>
             {% endif %}
     
-            {% if showESA and showupdate %} 
+            {% if showESA and showupdate and showappointment %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry esa_filter_tag" id="event-3">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-3">
-                ESA Assessment abandoned
+                ESA Appointment: Assessment abandoned
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-3">
@@ -191,10 +305,10 @@
             {% endif %}
     
 
-            {% if showUC and showoutgoing %} 
+            {% if showUC and showoutgoing and showdocument %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-4">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-4">
-                UC Sent questionnaire
+                UC Documentation: Sent questionnaire
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-4">
@@ -208,10 +322,10 @@
             {% endif %}
     
 
-            {% if showPIP and showupdate %} 
+            {% if showPIP and showupdate and showdocument %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry pip_filter_tag" id="event-5">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-5">
-                PIP Paper based review booked
+                PIP Documentaion: Paper based review booked
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-5">
@@ -224,10 +338,10 @@
             </li>
             {% endif %}
     
-            {% if showESA and showincoming %} 
+            {% if showESA and showincoming and showdocument %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry esa_filter_tag" id="event-6">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-6">
-                ESA Returned questionnaire
+                ESA Documentation: Returned questionnaire
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-6">
@@ -240,10 +354,10 @@
             </li>
             {% endif %}
     
-            {% if showUC and showupdate %} 
+            {% if showUC and showupdate and showdocument %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-7">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-7">
-                UC Initial or further evidence reviewed
+                UC Documentation Initial or further evidence reviewed
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-7">
@@ -256,26 +370,11 @@
             </li>
             {% endif %}
     
-            {% if showPIP and showincoming %} 
-            <li class="dwp-timeline__entry dwp-timeline__events--entry pip_filter_tag" id="event-8">
-              <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-8">
-                PIP Progress chasing
-              </h2>
     
-              <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-8">
-                Email from the claimant by Gordon Carroll
-              </p>
-    
-              <p class="govuk-caption-m" id="event-date-8">
-                6 June 2023
-              </p>
-            </li>
-            {% endif %}
-    
-            {% if showUC and showincoming %} 
+            {% if showUC and showincoming and showappointment %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-9">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-9">
-                UC Rescheduled an assessment
+                UC Appointment: Rescheduled an assessment
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-9">
@@ -288,10 +387,10 @@
             </li>
             {% endif %}
     
-            {% if showUC and showincoming %} 
+            {% if showUC and showincoming and showappointment %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-10">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-10">
-                UC Rescheduled an assessment
+                UC Appointment: Rescheduled an assessment
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-10">
@@ -304,10 +403,10 @@
             </li>
             {% endif %}
     
-            {% if showUC and showincoming %} 
+            {% if showUC and showincoming and showdocument and showdocument %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-11">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-11">
-                UC Returned questionnaire
+                UC Documentation: Returned questionnaire
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-11">
