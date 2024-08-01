@@ -20,7 +20,7 @@
 {% set showUC = true if data['benefit-type'] and data['benefit-type'].includes('UC') or showAll %}
 
 
-
+{% set checkincoming =  true if data['contact-type'] and data['contact-type'].includes('incoming') %}
 
 {% set checkincoming = data['contact-type'] and data['contact-type'].includes('incoming') %}
 {% set checkoutgoing = data['contact-type'] and data['contact-type'].includes('outgoing') %}
@@ -139,7 +139,7 @@
 
           
 
-            {% if showUC or showincoming %}
+            {% if showUC and showincoming %}
             
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-1">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-1">
@@ -157,7 +157,7 @@
             {% endif %}
 
 
-            {% if showPIP or showincoming %} 
+            {% if showPIP and showincoming %} 
     
             <li class="dwp-timeline__entry dwp-timeline__events--entry pip_filter_tag" id="event-2">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-2">
@@ -165,7 +165,7 @@
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-2">
-                Telephone call from the claimant by Gordon Carroll
+                Post from the claimant by Gordon Carroll
               </p>
     
               <p class="govuk-caption-m" id="event-date-2">
@@ -174,7 +174,7 @@
             </li>
             {% endif %}
     
-            {% if showESA or showupdate %} 
+            {% if showESA and showupdate %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry esa_filter_tag" id="event-3">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-3">
                 ESA Assessment abandoned
@@ -191,14 +191,14 @@
             {% endif %}
     
 
-            {% if showUC and showincoming %} 
+            {% if showUC and showoutgoing %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-4">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-4">
                 UC Sent questionnaire
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-4">
-                Telephone call to the claimant by Gordon Carroll
+                Post send to the claimant by Gordon Carroll
               </p>
     
               <p class="govuk-caption-m" id="event-date-4">
@@ -208,7 +208,7 @@
             {% endif %}
     
 
-            {% if showPIP or showupdate %} 
+            {% if showPIP and showupdate %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry pip_filter_tag" id="event-5">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-5">
                 PIP Paper based review booked
@@ -224,14 +224,14 @@
             </li>
             {% endif %}
     
-            {% if showESA or showincoming %} 
+            {% if showESA and showincoming %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry esa_filter_tag" id="event-6">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-6">
                 ESA Returned questionnaire
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-6">
-                Telephone call from the claimant by Gordon Carroll
+                Post from the claimant by Gordon Carroll
               </p>
     
               <p class="govuk-caption-m" id="event-date-6">
@@ -240,7 +240,7 @@
             </li>
             {% endif %}
     
-            {% if showUC or showupdate %} 
+            {% if showUC and showupdate %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-7">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-7">
                 UC Initial or further evidence reviewed
@@ -256,7 +256,7 @@
             </li>
             {% endif %}
     
-            {% if showPIP or showincoming %} 
+            {% if showPIP and showincoming %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry pip_filter_tag" id="event-8">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-8">
                 PIP Progress chasing
@@ -272,14 +272,14 @@
             </li>
             {% endif %}
     
-            {% if showUC %} 
+            {% if showUC and showincoming %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-9">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-9">
                 UC Rescheduled an assessment
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-9">
-                Telephone call to the claimant by Gordon Carroll
+                Telephone call from the claimant by Gordon Carroll
               </p>
     
               <p class="govuk-caption-m" id="event-date-9">
@@ -288,7 +288,7 @@
             </li>
             {% endif %}
     
-            {% if showUC or showincoming %} 
+            {% if showUC and showincoming %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-10">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-10">
                 UC Rescheduled an assessment
@@ -304,14 +304,14 @@
             </li>
             {% endif %}
     
-            {% if showUC or showupdate %} 
+            {% if showUC and showincoming %} 
             <li class="dwp-timeline__entry dwp-timeline__events--entry uc_filter_tag" id="event-11">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1" id="event-header-11">
                 UC Returned questionnaire
               </h2>
     
               <p class="govuk-caption-m govuk-!-margin-bottom-1" id="event-description-11">
-                Telephone call from the claimant by Gordon Carroll
+                Post from the claimant by Gordon Carroll
               </p>
     
               <p class="govuk-caption-m" id="event-date-11">
